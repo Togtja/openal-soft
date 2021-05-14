@@ -1579,7 +1579,7 @@ void ALCcontext::allocVoices(size_t addcount)
     /* Convert element count to cluster count. */
     addcount = (addcount+(clustersize-1)) / clustersize;
 
-    if(addcount >= std::numeric_limits<int>::max()/clustersize - mVoiceClusters.size())
+    if(addcount >= (std::numeric_limits<int>::max)()/clustersize - mVoiceClusters.size())
         throw std::runtime_error{"Allocating too many voices"};
     const size_t totalcount{(mVoiceClusters.size()+addcount) * clustersize};
     TRACE("Increasing allocated voices to %zu\n", totalcount);
@@ -3036,7 +3036,7 @@ static size_t GetIntegerv(ALCdevice *device, ALCenum param, const al::span<int> 
             std::lock_guard<std::mutex> _{device->StateLock};
             device->HrtfList = EnumerateHrtf(device->DeviceName.c_str());
             values[0] = static_cast<int>(minz(device->HrtfList.size(),
-                std::numeric_limits<int>::max()));
+                (std::numeric_limits<int>::max)()));
         }
         return 1;
 
